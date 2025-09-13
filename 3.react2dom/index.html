@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script >
+        function render(vnode) {
+            if(typeof vnode == "number"){
+                return document.createTextNode(vnode.toString())
+            }
+            if(typeof vnode=="string"){
+                return document.createTextNode(vnode)
+            }
+            const {tag,attrs={},children} = vnode
+
+            let el = document.createElement(tag)
+
+            for (let key in attrs) {
+                el.setAttribute(key,attrs[key])
+            }
+            
+            if (children.length>0&&Array.isArray(children)){
+                children.forEach(e=>{
+                    el.appendChild(render(e))
+                })
+            }
+            return el
+        }
+        const vnode = {
+            tag: 'DIV',
+            attrs: {
+                id: 'app'
+            },
+            children: [
+                {
+                    tag: 'SPAN',
+                    children: [
+                        { tag: 'A', children: [] }
+                    ]
+                },
+                {
+                    tag: 'SPAN',
+                    children: [
+                        { tag: 'A', children: [] },
+                        { tag: 'A', children: [] }
+                    ]
+                }
+            ]
+        }
+        const vDom = {
+                tag: 'DIV',
+                attrs: {
+                    id: 'app'
+                },
+                children: [
+                    {
+                        tag: 'SPAN',
+                        children: [{ tag: 'A', children: [] }]
+                    },
+                    {
+                        tag: 'SPAN',
+                        children: [
+                            { tag: 'A', children: [123] },
+                            { tag: 'A', children: [456] },
+                            789
+                        ]
+                    }
+                ]
+            };
+        document.body.appendChild(render(vDom))
+    </script>
+</body>
+
+</html>

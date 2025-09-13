@@ -1,0 +1,28 @@
+.fan {
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+    position: relative;
+
+}
+.box {
+    width: 100px;
+    height: 50px;
+    overflow: hidden;
+}
+.fan1{
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+    position: relative;
+    clip-path: polygon(50% 50%, 0% 0%, 100% 0%);
+}
+.fan2 {
+    width: 0;
+    height: 0;
+    border: 50px solid;
+    border-radius: 0px;
+    border-color: red blue red red;
+}
