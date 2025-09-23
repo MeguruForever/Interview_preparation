@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .osvg {
+            display: block;
+            margin: 50px auto;
+        }
+        .circle {
+            stroke-dasharray: 628;
+            stroke-dashoffset: 628;
+            transition: stroke-dashoffset 0.2s linear;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+    </style>
+</head>
+<body>
+    <svg width="300" height="300" class="osvg">
+        <circle class="circle" cx="150" cy="150" r="100"
+            fill="transparent" stroke-width="12" stroke="gray">
+        </circle>
+        <text class="text" x="150" y="150" fill="grey" text-anchor="middle" alignment-baseline="middle">0%</text>
+    </svg>
+    <script>
+        let oround = document.querySelector('.circle');
+        let otext = document.querySelector('.text');
+
+        let olength = oround.getTotalLength();
+        function setProgress(per) {
+            if (per < 0) per = 0;
+            if (per > 100) per = 100;
+            let offset = olength * (1 - per / 100);
+            oround.style.strokeDashoffset = offset;
+            otext.textContent = per + '%';
+        }
+        var i = 0;
+        setInterval(() => {
+            setProgress(i);
+            i++;
+            if (i >= arr.length) i = 0;
+        }, 200);
+    </script>
+</body>
+</html>
